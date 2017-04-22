@@ -137,39 +137,41 @@ It is already set to UTC.
 ## Create FlaskApp.conf to edit: sudo nano /etc/apache2/sites-available/FlaskApp.conf
 Add the following lines of code to the file to configure the virtual host.
 
-<VirtualHost *:80>
+> <VirtualHost *:80
 	ServerName 34.207.168.240
 	ServerAdmin maheshya@gmail.com
 	WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi
-	<Directory /var/www/FlaskApp/FlaskApp/>
+	<Directory /var/www/FlaskApp/FlaskApp/
 		Order allow,deny
 		Allow from all
-	</Directory>
+	</Directory
 	Alias /static /var/www/FlaskApp/FlaskApp/static
-	<Directory /var/www/FlaskApp/FlaskApp/static/>
+	<Directory /var/www/FlaskApp/FlaskApp/static/
 		Order allow,deny
 		Allow from all
-	</Directory>
+	</Directory
 	ErrorLog ${APACHE_LOG_DIR}/error.log
 	LogLevel warn
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
+</VirtualHost
+
 Enable the virtual host with the following command: sudo a2ensite FlaskApp
 
 ## Create the .wsgi File
-Create the .wsgi File under /var/www/FlaskApp:
+1. Create the .wsgi File under /var/www/FlaskApp:
 
 cd /var/www/FlaskApp
 sudo nano flaskapp.wsgi 
-Add the following lines of code to the flaskapp.wsgi file:
 
-#!/usr/bin/python
+1. Add the following lines of code to the flaskapp.wsgi file:
+
+> #!/usr/bin/python
 import sys
 import logging
 logging.basicConfig(stream=sys.stderr)
 sys.path.insert(0,"/var/www/FlaskApp/")
 
-from FlaskApp import app as application
+> from FlaskApp import app as application
 application.secret_key = 'Add your secret key'
 
 ## Restart Apache
