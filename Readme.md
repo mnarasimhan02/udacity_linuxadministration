@@ -87,5 +87,34 @@ sudo ufw allow 2200/tcp
 sudo ufw allow 80/tcp
 sudo ufw allow 123/udp
 sudo ufw enable 
-Configure the local timezone to UTC
+
+## Configure the local timezone to UTC
+Configure the time zone sudo dpkg-reconfigure tzdata
+It is already set to UTC.
+
+## Install and configure Apache to serve a Python mod_wsgi application
+- Install Apache sudo apt-get install apache2
+- Install mod_wsgi sudo apt-get install python-setuptools libapache2-mod-wsgi
+- Restart Apache sudo service apache2 restart
+
+
+## Install and configure PostgreSQL
+- Install PostgreSQL sudo apt-get install postgresql
+- Login as user "postgres" sudo su - postgres
+- Get into postgreSQL shell psql
+
+- Create a new database named catalog and create a new user named catalog in postgreSQL shell
+
+- postgres=# CREATE DATABASE catalog;
+- postgres=# CREATE USER catalog;
+- Set a password for user catalog
+
+- postgres=# ALTER ROLE catalog WITH PASSWORD 'password';
+- Give user "catalog" permission to "catalog" application database
+- postgres=# GRANT ALL PRIVILEGES ON DATABASE catalog TO catalog;
+- Quit postgreSQL postgres=# \q
+
+- Exit from user "postgres" 
+- exit
+
 
