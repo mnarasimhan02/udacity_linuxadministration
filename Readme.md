@@ -1,8 +1,21 @@
-Linux-Server-Configuration-UDACITY
+***Linux-Server-Configuration-UDACITY***
 
 In this project, a Linux virtual machine needs to be configurated to support the Item Catalog website. I have used Amazon Light sail to create a virtual machine and deploy catalog app
 
 You can visit http://34.207.168.240/ to check the deployed app.
+
+Project Overview
+
+A baseline installation of a Linux distribution on a virtual machine and prepare it to host web applications, to include installing updates, securing it from a number of attack vectors and installing/configuring web and database servers
+
+> Why this Project?
+
+>> A deep understanding of exactly what web applications are doing, how they are hosted, and the interactions between multiple systems are. This project, turns a brand-new, bare bones, Linux server into the secure and efficient web application host that a Data Driven Web Applications Needs.
+
+> Major Keypoints
+
+>> i.Deploying a web application to a publicly accessible server.
+>> ii.Properly securing application ensures, application remains stable and that user’s data is safe.
 
 Tasks
 
