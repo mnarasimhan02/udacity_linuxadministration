@@ -57,15 +57,15 @@ A baseline installation of a Linux distribution on a virtual machine and prepare
 
 **On you virtual machine:**
 
-$ su - grader
-$ mkdir .ssh
-$ touch .ssh/authorized_keys
-$ nano .ssh/authorized_keys
-Copy the public key generated on your local machine to this file and save
-
-$ chmod 700 .ssh
-$ chmod 644 .ssh/authorized_keys
-reload SSH using service ssh restart
+- $ su - grader
+- $ mkdir .ssh
+- $ touch .ssh/authorized_keys
+- $ nano .ssh/authorized_keys
+- Copy the public key generated on your local machine to this file and save
+- 
+- $ chmod 700 .ssh
+- $ chmod 644 .ssh/authorized_keys
+- reload SSH using service ssh restart
 
 now you can use ssh to login with the new user you created
 ssh -i [privateKeyFilename] grader@34.207.168.240
