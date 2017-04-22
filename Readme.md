@@ -117,4 +117,65 @@ It is already set to UTC.
 - Exit from user "postgres" 
 - exit
 
+## Install git, clone and setup your Catalog App project.
+1. Install Git using sudo apt-get install git
+1. Use cd /var/www to move to the /var/www directory
+1. Create the application directory sudo mkdir FlaskApp
+1. Move inside this directory using cd FlaskApp
+1. Clone the Catalog App to the virtual machine git clone https://github.com/mnarasimhan02/udacity_item_catalog.git
+1. Rename the project's name sudo mv ./Item_Catalog_UDACITY ./FlaskApp
+1. Move to the inner FlaskApp directory using cd FlaskApp
+1. Rename website.py to __init__.py using sudo mv website.py __init__.py
+1. Edit database_setup.py, website.py and functions_helper.py and change engine = create_engine('sqlite:///fanshopwithgears.db')
+1. to engine = create_engine('postgresql://catalog:password@localhost/catalog')
+1. Install pip sudo apt-get install python-pip
+1. Install psycopg2 sudo apt-get -qqy install postgresql python-psycopg2
+1. Create database schema sudo python database_setup.py
+1. Configure and Enable a New Virtual Host
+
+
+## Create FlaskApp.conf to edit: sudo nano /etc/apache2/sites-available/FlaskApp.conf
+Add the following lines of code to the file to configure the virtual host.
+
+<VirtualHost *:80>
+	ServerName 34.207.168.240
+	ServerAdmin maheshya@gmail.com
+	WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi
+	<Directory /var/www/FlaskApp/FlaskApp/>
+		Order allow,deny
+		Allow from all
+	</Directory>
+	Alias /static /var/www/FlaskApp/FlaskApp/static
+	<Directory /var/www/FlaskApp/FlaskApp/static/>
+		Order allow,deny
+		Allow from all
+	</Directory>
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	LogLevel warn
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+Enable the virtual host with the following command: sudo a2ensite FlaskApp
+
+## Create the .wsgi File
+Create the .wsgi File under /var/www/FlaskApp:
+
+cd /var/www/FlaskApp
+sudo nano flaskapp.wsgi 
+Add the following lines of code to the flaskapp.wsgi file:
+
+#!/usr/bin/python
+import sys
+import logging
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(0,"/var/www/FlaskApp/")
+
+from FlaskApp import app as application
+application.secret_key = 'Add your secret key'
+
+## Restart Apache
+Restart Apache sudo service apache2 restart
+
+### References:
+https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
+
 
