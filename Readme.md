@@ -1,10 +1,10 @@
-***Linux-Server-Configuration-UDACITY***
+## ***Linux-Server-Configuration-UDACITY***
 
 In this project, a Linux virtual machine needs to be configurated to support the Item Catalog website. I have used Amazon Light sail to create a virtual machine and deploy catalog app
 
 You can visit http://34.207.168.240/ to check the deployed app.
 
-Project Overview
+## Project Overview
 
 A baseline installation of a Linux distribution on a virtual machine and prepare it to host web applications, to include installing updates, securing it from a number of attack vectors and installing/configuring web and database servers
 
@@ -17,7 +17,7 @@ A baseline installation of a Linux distribution on a virtual machine and prepare
  > i.Deploying a web application to a publicly accessible server.
  > ii.Properly securing application ensures, application remains stable and that user’s data is safe.
 
-Tasks
+**Tasks**
 
 1. Launch your Virtual Machine with your Udacity account
 2. Follow the instructions provided to SSH into your server
@@ -55,7 +55,7 @@ Tasks
 4. generate keys on local machine usingssh-keygen ; then save the private key in ~/.ssh on local machine
 5. deploy public key on developement enviroment
 
-On you virtual machine:
+**On you virtual machine:**
 
 $ su - grader
 $ mkdir .ssh
@@ -68,11 +68,24 @@ $ chmod 644 .ssh/authorized_keys
 reload SSH using service ssh restart
 
 now you can use ssh to login with the new user you created
-
 ssh -i [privateKeyFilename] grader@34.207.168.240
 
-Update all currently installed packages
-
+## Update all currently installed packages
 sudo apt-get update
 sudo apt-get upgrade
 Change the SSH port from 22 to 2200
+
+- ### Under the Firewall section of Amazon LightSail add another application with type as custom for port 2200.
+- Use sudo vim /etc/ssh/sshd_config and then change Port 22 to Port 2200 , save & quit.
+- Reload SSH using sudo service ssh restart
+
+## Configure the Uncomplicated Firewall (UFW)
+
+Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
+
+sudo ufw allow 2200/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 123/udp
+sudo ufw enable 
+Configure the local timezone to UTC
+
