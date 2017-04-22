@@ -10,12 +10,12 @@ A baseline installation of a Linux distribution on a virtual machine and prepare
 
 > Why this Project?
 
->> A deep understanding of exactly what web applications are doing, how they are hosted, and the interactions between multiple systems are. This project, turns a brand-new, bare bones, Linux server into the secure and efficient web application host that a Data Driven Web Applications Needs.
+ > A deep understanding of exactly what web applications are doing, how they are hosted, and the interactions between multiple systems are. This project, turns a brand-new, bare bones, Linux server into the secure and efficient web application host that a Data Driven Web Applications Needs.
 
 > Major Keypoints
 
->> i.Deploying a web application to a publicly accessible server.
->> ii.Properly securing application ensures, application remains stable and that user’s data is safe.
+ > i.Deploying a web application to a publicly accessible server.
+ > ii.Properly securing application ensures, application remains stable and that user’s data is safe.
 
 Tasks
 
@@ -36,14 +36,43 @@ Tasks
 
 ***Instructions for SSH access to the instance***
 
-Download Private Key from Amazon Light sail account page below
+1. Download Private Key from Amazon Light sail account page below
 
-Move the private key file into the folder ~/.ssh (where ~ is your environment's home directory). So if you downloaded the file to the Downloads folder, just execute the following command in your terminal. mv ~/Downloads/LightsailDefaultPrivateKey.pem ~/.ssh/
+2. Move the private key file into the folder ~/.ssh (where ~ is your environment's home directory). So if you downloaded the file to the Downloads folder, just execute the following command in your terminal. mv ~/Downloads/LightsailDefaultPrivateKey.pem ~/.ssh/
 
-Open your terminal and type in chmod 600 ~/.ssh/LightsailDefaultPrivateKey.pem
-In your terminal, type in ssh -i ~/.ssh/LightsailDefaultPrivateKey.pem root@34.207.168.240
+3. Open your terminal and type in chmod 600 ~/.ssh/LightsailDefaultPrivateKey.pem
+4. In your terminal, type in ssh -i ~/.ssh/LightsailDefaultPrivateKey.pem root@34.207.168.240
 
-Development Environment Information
+5. Development Environment Information
+> Public IP Address
+> 34.207.168.240
 
-Public IP Address
-34.207.168.240
+***Create a new user named grader***
+
+1. sudo adduser grader
+2. nano /etc/sudoers.d/grader, type in grader ALL=(ALL:ALL) ALL, save and quit
+3. Set ssh login using keys
+4. generate keys on local machine usingssh-keygen ; then save the private key in ~/.ssh on local machine
+5. deploy public key on developement enviroment
+
+On you virtual machine:
+
+$ su - grader
+$ mkdir .ssh
+$ touch .ssh/authorized_keys
+$ nano .ssh/authorized_keys
+Copy the public key generated on your local machine to this file and save
+
+$ chmod 700 .ssh
+$ chmod 644 .ssh/authorized_keys
+reload SSH using service ssh restart
+
+now you can use ssh to login with the new user you created
+
+ssh -i [privateKeyFilename] grader@34.207.168.240
+
+Update all currently installed packages
+
+sudo apt-get update
+sudo apt-get upgrade
+Change the SSH port from 22 to 2200
